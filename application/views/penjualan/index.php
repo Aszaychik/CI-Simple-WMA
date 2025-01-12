@@ -135,7 +135,7 @@
 			Predict
 			</button>
 
-			<!-- Modal -->
+			<!-- Modal Predict -->
 			<div class="modal fade" id="predictModal" tabindex="-1" aria-labelledby="predictModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -196,7 +196,30 @@
 				</div>
 			</div>
 			</div>
+			
+			<!-- Button trigger modal Chart -->
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#chartModal">
+			Chart
+			</button>
 
+			<!-- Modal Chart -->
+			<div class="modal fade" id="chartModal" tabindex="-1" aria-labelledby="chartModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="chartModalLabel">
+					Laporan Statistik 
+					</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+				<div class="card chart-container">
+					<canvas id="chart"></canvas>
+				</div>
+				</div>
+				</div>
+			</div>
+			</div>
         </div>
     </div>
 </div>
@@ -227,3 +250,55 @@
         </div>
     </div>
 </div>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js">
+</script>
+<script>
+	
+    // PHP Data
+    const labels = [
+        <?php foreach ($penjualan as $row): ?>
+            "<?= date('M Y', strtotime($row->tanggal_penjualan)); ?>",
+        <?php endforeach; ?>
+        "<?= $b; ?>" // Add the predicted month's label
+    ];
+
+    const data = [
+        <?php foreach ($penjualan as $row): ?>
+            <?= $row->jumlah; ?>,
+        <?php endforeach; ?>
+        <?= number_format(round($newft, 0), 0, ".", ""); ?> // Add the predicted month's data
+    ];
+
+    // Chart.js Configuration
+    const ctx = document.getElementById("chart").getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels, // Dynamic labels from PHP
+            datasets: [
+                {
+                    label: 'Monthly Sales',
+                    backgroundColor: 'rgba(161, 198, 247, 1)',
+                    borderColor: 'rgb(47, 128, 237)',
+                    data: data.slice(0, -1), // Use only actual data for this dataset
+                },
+                {
+                    label: 'Predicted Sales',
+                    backgroundColor: 'rgba(255, 210, 143, 1)', // Orange color
+                    borderColor: 'rgba(255, 154, 0, 1)', 
+                    data: data, // Only show the last data point
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: { // Chart.js v3+ syntax
+                    beginAtZero: true
+                }
+            }
+        },
+    });
+</script>
+
+
