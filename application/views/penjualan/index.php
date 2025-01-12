@@ -305,7 +305,7 @@
                     label: 'Monthly Sales',
                     backgroundColor: 'rgba(161, 198, 247, 1)',
                     borderColor: 'rgb(47, 128, 237)',
-                    data: data.slice(0, -4), // Use only actual data for this dataset
+                    data: data.slice(0, -5), // Use only actual data for this dataset
                     fill: true, // fill the area below the line
 					pointStyle: 'circle',
 					pointRadius: 10,
@@ -315,7 +315,7 @@
                     label: 'Predicted Sales',
                     backgroundColor: 'rgba(255, 210, 143, 1)', // Orange color
                     borderColor: 'rgba(255, 154, 0, 1)',
-                    data: Array(data.length - 5).fill(null).concat(data.slice(-5)),
+                    data: Array(data.length - 6).fill(null).concat(data.slice(-6)),
                     fill: true, // fill the area below the line
 					pointStyle: 'circle',
 					pointRadius: 10,
