@@ -204,7 +204,7 @@
 
 			<!-- Modal Chart -->
 			<div class="modal fade" id="chartModal" tabindex="-1" aria-labelledby="chartModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 				<div class="modal-header">
 					<h1 class="modal-title fs-5" id="chartModalLabel">
@@ -213,11 +213,14 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-				<div class="card chart-container">
+					<div class="card chart-container">
 					<canvas id="chart"></canvas>
+					</div>
 				</div>
 				</div>
-				</div>
+			</div>
+			</div>
+
 			</div>
 			</div>
         </div>
