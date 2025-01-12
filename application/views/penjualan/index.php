@@ -265,7 +265,11 @@
 
 	$next4MonthLabel = date('M Y', strtotime($next3MonthLabel) + 60 * 60 * 24 * 31);
 	$next4MonthValue = round((($next3MonthValue*3)+($next2MonthValue*2)+($newft*1))/6,2);
+
+	$next5MonthLabel = date('M Y', strtotime($next4MonthLabel) + 60 * 60 * 24 * 31);
+	$next5MonthValue = round((($next4MonthValue*3)+($next3MonthValue*2)+($next2MonthValue*1))/6,2);
 	?>
+	
     // PHP Data
     const labels = [
         <?php foreach ($penjualan as $row): ?>
@@ -276,6 +280,7 @@
 		"<?= $next2MonthLabel; ?>",
 		"<?= $next3MonthLabel; ?>",
 		"<?= $next4MonthLabel; ?>",
+		"<?= $next5MonthLabel; ?>",
     ];
 
     const data = [
@@ -287,8 +292,8 @@
 		<?= number_format(round($next2MonthValue, 0), 0, ".", ""); ?>,
 		<?= number_format(round($next3MonthValue, 0), 0, ".", ""); ?>,
 		<?= number_format(round($next4MonthValue, 0), 0, ".", ""); ?>,
+		<?= number_format(round($next5MonthValue, 0), 0, ".", ""); ?>,
     ];
-
     // Chart.js Configuration
     const ctx = document.getElementById("chart").getContext('2d');
     const myChart = new Chart(ctx, {
@@ -310,7 +315,7 @@
                     label: 'Predicted Sales',
                     backgroundColor: 'rgba(255, 210, 143, 1)', // Orange color
                     borderColor: 'rgba(255, 154, 0, 1)',
-                    data: data, // Include predicted data for the second dataset
+                    data: Array(data.length - 5).fill(null).concat(data.slice(-5)),
                     fill: true, // fill the area below the line
 					pointStyle: 'circle',
 					pointRadius: 10,
