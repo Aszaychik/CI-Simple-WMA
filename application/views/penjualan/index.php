@@ -253,19 +253,18 @@
         </div>
     </div>
 </div>
-<script
-src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
 	<?php
 	$next2MonthLabel = date('M Y', strtotime($b) + 60 * 60 * 24 * 31);
-	$next2MonthValue =round((($newft*3)+($ft[0]->jumlah*2)+($ft[1]->jumlah*1))/6,2);
+	$next2MonthValue = round((($newft*3)+($ft[0]->jumlah*2)+($ft[1]->jumlah*1))/6,2);
 
 	$next3MonthLabel = date('M Y', strtotime($next2MonthLabel) + 60 * 60 * 24 * 31);
-	$next3MonthValue =round((($next2MonthValue*3)+($newft*2)+($ft[0]->jumlah*1))/6,2);
+	$next3MonthValue = round((($next2MonthValue*3)+($newft*2)+($ft[0]->jumlah*1))/6,2);
 
 	$next4MonthLabel = date('M Y', strtotime($next3MonthLabel) + 60 * 60 * 24 * 31);
-	$next4MonthValue =round((($next3MonthValue*3)+($next2MonthValue*2)+($newft*1))/6,2);
+	$next4MonthValue = round((($next3MonthValue*3)+($next2MonthValue*2)+($newft*1))/6,2);
 	?>
     // PHP Data
     const labels = [
@@ -302,23 +301,38 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js">
                     backgroundColor: 'rgba(161, 198, 247, 1)',
                     borderColor: 'rgb(47, 128, 237)',
                     data: data.slice(0, -4), // Use only actual data for this dataset
+                    fill: true, // fill the area below the line
+					pointStyle: 'circle',
+					pointRadius: 10,
+					pointHoverRadius: 15
                 },
                 {
                     label: 'Predicted Sales',
                     backgroundColor: 'rgba(255, 210, 143, 1)', // Orange color
-                    borderColor: 'rgba(255, 154, 0, 1)', 
-                    data: data, // Only show the last data point
+                    borderColor: 'rgba(255, 154, 0, 1)',
+                    data: data, // Include predicted data for the second dataset
+                    fill: true, // fill the area below the line
+					pointStyle: 'circle',
+					pointRadius: 10,
+					pointHoverRadius: 15
                 }
             ]
         },
         options: {
             scales: {
                 y: { // Chart.js v3+ syntax
-                    beginAtZero: true
+                    beginAtZero: false, // Disable beginAtZero
+                    min: 1200, // Set minimum value to 1200
+                    ticks: {
+                        callback: function(value) {
+                            return value.toFixed(0); // Show integer values
+                        }
+                    }
                 }
             }
-        },
+        }
     });
 </script>
+
 
 
