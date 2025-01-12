@@ -254,20 +254,37 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js">
 </script>
 <script>
-	
+	<?php
+	$next2MonthLabel = date('M Y', strtotime($b) + 60 * 60 * 24 * 31);
+	$next2MonthValue =round((($newft*3)+($ft[0]->jumlah*2)+($ft[1]->jumlah*1))/6,2);
+
+	$next3MonthLabel = date('M Y', strtotime($next2MonthLabel) + 60 * 60 * 24 * 31);
+	$next3MonthValue =round((($next2MonthValue*3)+($newft*2)+($ft[0]->jumlah*1))/6,2);
+
+	$next4MonthLabel = date('M Y', strtotime($next3MonthLabel) + 60 * 60 * 24 * 31);
+	$next4MonthValue =round((($next3MonthValue*3)+($next2MonthValue*2)+($newft*1))/6,2);
+	?>
     // PHP Data
     const labels = [
         <?php foreach ($penjualan as $row): ?>
             "<?= date('M Y', strtotime($row->tanggal_penjualan)); ?>",
         <?php endforeach; ?>
-        "<?= $b; ?>" // Add the predicted month's label
+		// Add the predicted month's label
+        "<?= $b; ?>",
+		"<?= $next2MonthLabel; ?>",
+		"<?= $next3MonthLabel; ?>",
+		"<?= $next4MonthLabel; ?>",
     ];
 
     const data = [
         <?php foreach ($penjualan as $row): ?>
             <?= $row->jumlah; ?>,
         <?php endforeach; ?>
-        <?= number_format(round($newft, 0), 0, ".", ""); ?> // Add the predicted month's data
+		// Add the predicted month's data
+        <?= number_format(round($newft, 0), 0, ".", ""); ?>,
+		<?= number_format(round($next2MonthValue, 0), 0, ".", ""); ?>,
+		<?= number_format(round($next3MonthValue, 0), 0, ".", ""); ?>,
+		<?= number_format(round($next4MonthValue, 0), 0, ".", ""); ?>,
     ];
 
     // Chart.js Configuration
@@ -281,7 +298,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js">
                     label: 'Monthly Sales',
                     backgroundColor: 'rgba(161, 198, 247, 1)',
                     borderColor: 'rgb(47, 128, 237)',
-                    data: data.slice(0, -1), // Use only actual data for this dataset
+                    data: data.slice(0, -4), // Use only actual data for this dataset
                 },
                 {
                     label: 'Predicted Sales',
