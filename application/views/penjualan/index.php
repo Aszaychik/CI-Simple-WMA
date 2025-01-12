@@ -125,10 +125,78 @@
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
+
                         </table>
                     </div>
                 </div>
             </div>
+			<!-- Button trigger modal Predict -->
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#predictModal">
+			Predict
+			</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="predictModal" tabindex="-1" aria-labelledby="predictModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="predictModalLabel">
+					Laporan Prediksi Bulan 
+					<?php
+					foreach ($bulandepan as $key ) {
+						echo $b = date('M Y', strtotime($key->tanggal_penjualan) + 60 * 60 * 24 * 31);
+					}
+					?>
+					</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<?php
+				$ft=$this->data_model->ftsma('tabel_penjualan',3,"DESC");
+				$totalft=0;
+				$totalft=($ft[0]->jumlah*3)+($ft[1]->jumlah*2)+($ft[2]->jumlah*1);
+				
+				$newft=round($totalft/6,2);
+				?>
+				<div class="modal-body">
+					<div class="text-center">
+					<h4 class="fw-bold">Pangkalan LPG 3Kg</h4>
+					<h5 class="mb-4">"RANBA"</h5>
+					<p>Dusun Randekan, Desa Soko, Kec. Tikung, Kab. Lamongan</p>
+					<table class="table table-bordered text-center">
+						<thead>
+						<tr>
+							<th>Bulan</th>
+							<th>Penjualan</th>
+						</tr>
+						</thead>
+						<tbody>
+						<?php
+						// Sort the data by date
+						usort($ft, function($a, $b) {
+							return strtotime($a->tanggal_penjualan) - strtotime($b->tanggal_penjualan);
+						});
+
+						foreach($ft as $row) {
+						?>
+						<tr>
+							<td><?= htmlspecialchars(date('M Y', strtotime($row->tanggal_penjualan))); ?></td>
+							<td><?= htmlspecialchars($row->jumlah); ?></td>
+						</tr>
+						<?php } ?>
+
+
+						<tr class="table-primary fw-bold">
+							<td>Prediksi <?= $b; ?></td>
+							<td><?= number_format(round($newft,0),0,",","."); ?></td>
+						</tr>
+						</tbody>
+					</table>
+					</div>
+				</div>
+				</div>
+			</div>
+			</div>
+
         </div>
     </div>
 </div>
