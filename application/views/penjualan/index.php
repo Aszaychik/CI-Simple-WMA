@@ -254,7 +254,6 @@
 	</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
 	<?php
 	$next2MonthLabel = date('M Y', strtotime($b) + 60 * 60 * 24 * 31);
@@ -273,9 +272,7 @@
 	// PHP Data
 	const labels = [
 		<?php foreach ($penjualan as $row): ?> "<?= date('M Y', strtotime($row->tanggal_penjualan)); ?>",
-		<?php endforeach; ?>
-		// Add the predicted month's label
-		"<?= $b; ?>",
+		<?php endforeach; ?> "<?= $b; ?>",
 		"<?= $next2MonthLabel; ?>",
 		"<?= $next3MonthLabel; ?>",
 		"<?= $next4MonthLabel; ?>",
@@ -286,35 +283,52 @@
 		<?php foreach ($penjualan as $row): ?>
 			<?= $row->jumlah; ?>,
 		<?php endforeach; ?>
-		// Add the predicted month's data
 		<?= number_format(round($newft, 0), 0, ".", ""); ?>,
 		<?= number_format(round($next2MonthValue, 0), 0, ".", ""); ?>,
 		<?= number_format(round($next3MonthValue, 0), 0, ".", ""); ?>,
 		<?= number_format(round($next4MonthValue, 0), 0, ".", ""); ?>,
 		<?= number_format(round($next5MonthValue, 0), 0, ".", ""); ?>,
 	];
+
+	// Calculate average of actual data
+	const actualData = data.slice(0, -5);
+	const averageValue = actualData.reduce((acc, val) => acc + val, 0) / actualData.length;
+
 	// Chart.js Configuration
 	const ctx = document.getElementById("chart").getContext('2d');
 	const myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: labels, // Dynamic labels from PHP
-			datasets: [{
+			labels: labels,
+			datasets: [
+				// Average line dataset
+				{
+					label: 'Average Sales',
+					borderColor: '#666',
+					borderDash: [5, 5], // Dashed line
+					data: labels.map(() => averageValue),
+					fill: false,
+					pointRadius: 0, // Hide points
+					borderWidth: 1,
+					tension: 0, // Straight lines
+				},
+				// Original datasets
+				{
 					label: 'Monthly Sales',
 					backgroundColor: 'rgba(161, 198, 247, 1)',
 					borderColor: 'rgb(47, 128, 237)',
-					data: data.slice(0, -5), // Use only actual data for this dataset
-					fill: true, // fill the area below the line
+					data: data.slice(0, -5),
+					fill: true,
 					pointStyle: 'circle',
 					pointRadius: 10,
 					pointHoverRadius: 15
 				},
 				{
 					label: 'Predicted Sales',
-					backgroundColor: 'rgba(255, 210, 143, 1)', // Orange color
+					backgroundColor: 'rgba(255, 210, 143, 1)',
 					borderColor: 'rgba(255, 154, 0, 1)',
 					data: Array(data.length - 6).fill(null).concat(data.slice(-6)),
-					fill: true, // fill the area below the line
+					fill: true,
 					pointStyle: 'circle',
 					pointRadius: 10,
 					pointHoverRadius: 15
@@ -323,12 +337,11 @@
 		},
 		options: {
 			scales: {
-				y: { // Chart.js v3+ syntax
-					beginAtZero: false, // Disable beginAtZero
-					min: 1200, // Set minimum value to 1200
+				y: {
+					min: 1200,
 					ticks: {
 						callback: function(value) {
-							return value.toFixed(0); // Show integer values
+							return value.toFixed(0);
 						}
 					}
 				}
