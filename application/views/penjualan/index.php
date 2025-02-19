@@ -303,7 +303,7 @@
 			datasets: [
 				// Average line dataset
 				{
-					label: 'Average Sales',
+					label: `Average Sales (${averageValue.toFixed(0)})`,
 					borderColor: '#666',
 					borderDash: [5, 5], // Dashed line
 					data: labels.map(() => averageValue),
