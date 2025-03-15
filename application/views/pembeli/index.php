@@ -1,4 +1,10 @@
 <div class="container-fluid py-4">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+	<style>
+		.page-item.active .page-link {
+			color: white !important;
+		}
+	</style>
 	<div class="row">
 		<div class="col-12">
 			<div class="card my-4">
@@ -12,16 +18,9 @@
 					<div class="col-12 d-flex justify-content-between align-items-center">
 						<div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalTambah">Tambah
 						</div>
-						<div class="input-group mb-3 w-25 border border-dark px-4">
-							<input type="text" id="searchInput" class="form-control" placeholder="Cari berdasarkan nama pembeli..."
-								aria-label="Search" aria-describedby="basic-addon2">
-							<span class="input-group-text" id="basic-addon2">
-								<i class="material-icons opacity-10 me-4">search</i>
-							</span>
-						</div>
 					</div>
 					<div class="table-responsive p-0">
-						<table class="table align-items-center mb-0">
+						<table id="datatable" class="table align-items-center mb-0">
 							<thead>
 								<tr>
 									<th class="text-uppercase text-secondary text-xxs font-weight-bolder ms-0 ">
@@ -42,12 +41,11 @@
 							</thead>
 							<tbody class="px-3">
 								<?php
-								$no = 1;
 								foreach ($pembeli as $row):
 								?>
 									<tr>
 										<td>
-											<h6 class="mb-0 text-sm ps-3 "> <?= $no++; ?></h6>
+											<h6 class="mb-0 text-sm ps-3 "> <?= $row->id; ?></h6>
 										</td>
 										<td>
 											<h6 class="mb-0 text-sm ps-3 "> <?= $row->nama_pembeli; ?></h6>
@@ -177,10 +175,6 @@
 							</tbody>
 
 						</table>
-						<!-- Pagination -->
-						<nav aria-label="Page navigation">
-							<?php echo $pagination; ?>
-						</nav>
 					</div>
 				</div>
 
@@ -228,24 +222,25 @@
 	</div>
 </div>
 
+<!-- Include jQuery and DataTables Scripts -->
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Initialize DataTables -->
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
-		const searchInput = document.getElementById('searchInput');
-		const tableRows = document.querySelectorAll('tbody tr');
-
-		function filterTable() {
-			const searchTerm = searchInput.value.toLowerCase();
-
-			tableRows.forEach(row => {
-				const namaCell = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-				if (namaCell.includes(searchTerm)) {
-					row.style.display = '';
-				} else {
-					row.style.display = 'none';
+	$(document).ready(function() {
+		$('#datatable').DataTable({
+			"pagingType": "full_numbers",
+			"dom": '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>rt<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+			"language": {
+				"paginate": {
+					"previous": "‹",
+					"next": "›",
+					"first": "«",
+					"last": "»"
 				}
-			});
-		}
-
-		searchInput.addEventListener('input', filterTable);
+			}
+		});
 	});
 </script>
