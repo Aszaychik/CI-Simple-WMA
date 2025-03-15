@@ -25,6 +25,7 @@
 										Usia</th>
 									<th class="text-uppercase text-secondary text-xxs font-weight-bolder ms-0  ">
 										Jumlah Tanggungan</th>
+									<th class="text-uppercase text-secondary text-xxs font-weight-bolder ms-0">Subsidi</th>
 									<th
 										class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 										Aksi</th>
@@ -50,6 +51,26 @@
 										</td>
 										<td>
 											<h6 class="mb-0 text-sm ps-3 "> <?= $row->jumlah_tanggungan; ?></h6>
+										</td>
+										<td>
+											<h6 class="mb-0 text-sm ps-3">
+												<?php
+												// Konversi gaji ke angka
+												$gaji = (float)str_replace(',', '', $row->gaji_penghasilan);
+
+												// Rumus pembobotan
+												$threshold = 1000000 + ($row->jumlah_tanggungan * 200000);
+
+												// Bonus threshold untuk usia di atas 50
+												if ($row->usia > 50) {
+													$threshold += 100000;
+												}
+
+												// Tentukan subsidi
+												echo ($gaji < $threshold) ? '<span class="badge bg-success">Subsidi</span>' :
+													'<span class="badge bg-danger">Tanpa Subsidi</span>';
+												?>
+											</h6>
 										</td>
 										<td class="align-middle text-center">
 											<a href="javascript:;"
