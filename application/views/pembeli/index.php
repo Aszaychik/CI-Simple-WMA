@@ -11,6 +11,13 @@
 				<div class="card-body px-3 pb-2">
 					<div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalTambah">Tambah
 					</div>
+					<div class="input-group mb-3">
+						<input type="text" id="searchInput" class="form-control" placeholder="Cari berdasarkan nama pembeli..."
+							aria-label="Search" aria-describedby="basic-addon2">
+						<span class="input-group-text" id="basic-addon2">
+							<i class="fas fa-search"></i>
+						</span>
+					</div>
 					<div class="table-responsive p-0">
 						<table class="table align-items-center mb-0">
 							<thead>
@@ -218,3 +225,25 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const searchInput = document.getElementById('searchInput');
+		const tableRows = document.querySelectorAll('tbody tr');
+
+		function filterTable() {
+			const searchTerm = searchInput.value.toLowerCase();
+
+			tableRows.forEach(row => {
+				const namaCell = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+				if (namaCell.includes(searchTerm)) {
+					row.style.display = '';
+				} else {
+					row.style.display = 'none';
+				}
+			});
+		}
+
+		searchInput.addEventListener('input', filterTable);
+	});
+</script>
