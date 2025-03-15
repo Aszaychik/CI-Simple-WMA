@@ -147,6 +147,10 @@
 							</tbody>
 
 						</table>
+						<!-- Pagination -->
+						<nav aria-label="Page navigation">
+							<?php echo $pagination; ?>
+						</nav>
 					</div>
 				</div>
 
