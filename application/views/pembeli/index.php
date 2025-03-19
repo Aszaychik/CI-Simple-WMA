@@ -75,7 +75,7 @@
 
 												// Tentukan subsidi
 												echo ($gaji < $threshold) ? '<span class="badge bg-success">Subsidi</span>' :
-													'<span class="badge bg-danger">Tanpa Subsidi</span>';
+													'<span class="badge bg-danger">Non Subsidi</span>';
 												?>
 											</h6>
 										</td>
