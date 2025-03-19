@@ -39,6 +39,14 @@
 					</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link text-white " href="<?= base_url('pembeli/month_pembeli'); ?>">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">groups</i>
+						</div>
+						<span class="nav-link-text ms-1">Pembeli Bulanan</span>
+					</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link text-white " href="<?= base_url('penjualan'); ?>">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">table_view</i>
