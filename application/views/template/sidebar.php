@@ -47,19 +47,27 @@
 					</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link text-white " href="<?= base_url('wma'); ?>">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">table_view</i>
+						</div>
+						<span class="nav-link-text ms-1">Prediksi Hitung</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="<?= base_url('wma/hasil'); ?>">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">table_view</i>
+						</div>
+						<span class="nav-link-text ms-1">Prediksi Hasil</span>
+					</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link text-white " href="<?= base_url('penjualan/predict_chart'); ?>">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">ssid_chart</i>
 						</div>
 						<span class="nav-link-text ms-1">Prediksi Chart</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white " href="<?= base_url('wma'); ?>">
-						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">table_view</i>
-						</div>
-						<span class="nav-link-text ms-1">Prediksi</span>
 					</a>
 				</li>
 				<li class="nav-item mt-3">
