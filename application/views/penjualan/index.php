@@ -167,6 +167,7 @@
 										<tr>
 											<th>Bulan</th>
 											<th>Penjualan</th>
+											<th>Status</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -176,11 +177,19 @@
 											return strtotime($a->tanggal_penjualan) - strtotime($b->tanggal_penjualan);
 										});
 
+										$average = array_sum(array_column($ft, 'jumlah')) / count($ft);
 										foreach ($ft as $row) {
 										?>
 											<tr>
 												<td><?= htmlspecialchars(date('M Y', strtotime($row->tanggal_penjualan))); ?></td>
 												<td><?= htmlspecialchars($row->jumlah); ?></td>
+												<td>
+													<?php if ($row->jumlah > $average) { ?>
+														<span class="badge bg-success">Diatas Rata-Rata</span>
+													<?php } else { ?>
+														<span class="badge bg-danger">Dibawah Rata-Rata</span>
+													<?php } ?>
+												</td>
 											</tr>
 										<?php } ?>
 
@@ -188,6 +197,13 @@
 										<tr class="table-primary fw-bold">
 											<td>Prediksi <?= $b; ?></td>
 											<td><?= number_format(round($newft, 0), 0, ",", "."); ?></td>
+											<td>
+												<?php if ($newft > $average) { ?>
+													<span class="badge bg-success">Diatas Rata-Rata</span>
+												<?php } else { ?>
+													<span class="badge bg-danger">Dibawah Rata-Rata</span>
+												<?php } ?>
+											</td>
 										</tr>
 									</tbody>
 								</table>
