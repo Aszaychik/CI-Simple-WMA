@@ -563,7 +563,7 @@ CREATE TABLE `tabel_penjualan` (
 INSERT INTO `tabel_penjualan` (`id_penjualan`, `tanggal_penjualan`, `jumlah`) VALUES
 (2, '2023-01-15', 1578),
 (3, '2023-02-15', 1302),
-(4, '2024-03-15', 1434),
+(4, '2023-03-15', 1434),
 (5, '2023-04-15', 1384),
 (6, '2023-05-15', 1392),
 (7, '2023-06-15', 1420),
