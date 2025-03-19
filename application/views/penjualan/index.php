@@ -39,7 +39,7 @@
 										</td>
 										<td>
 											<h6 class="mb-0 text-sm ps-3 ">
-												<?= date('M Y', strtotime($row->tanggal_penjualan)); ?></h6>
+												<?= date('F Y', strtotime($row->tanggal_penjualan)); ?></h6>
 										</td>
 										<td>
 											<h6 class="mb-0 text-sm ps-3 "> <?= $row->jumlah; ?></h6>
@@ -65,7 +65,7 @@
 												<div class="modal-content">
 													<div class="modal-header">
 														<h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Data
-															<?= date('M Y', strtotime($row->tanggal_penjualan)); ?></h1>
+															<?= date('F Y', strtotime($row->tanggal_penjualan)); ?></h1>
 														<button type="button" class="btn-close" data-bs-dismiss="modal"
 															aria-label="Close"></button>
 													</div>
@@ -108,7 +108,7 @@
 													</div>
 													<div class="modal-body">
 														<p class="text-danger">Apakah Kamu Yakin Ingin Menghapus Penjualan
-															Bulan <?= date('M Y', strtotime($row->tanggal_penjualan)); ?>
+															Bulan <?= date('F Y', strtotime($row->tanggal_penjualan)); ?>
 															Dengan Jumlah Penjualan Rp <?= $row->jumlah; ?>
 														</p>
 													</div>
@@ -144,7 +144,7 @@
 								Laporan Prediksi Bulan
 								<?php
 								foreach ($bulandepan as $key) {
-									echo $b = date('M Y', strtotime($key->tanggal_penjualan) + 60 * 60 * 24 * 31);
+									echo $b = date('F Y', strtotime($key->tanggal_penjualan) + 60 * 60 * 24 * 31);
 								}
 								?>
 							</h1>
@@ -181,7 +181,7 @@
 										foreach ($ft as $row) {
 										?>
 											<tr>
-												<td><?= htmlspecialchars(date('M Y', strtotime($row->tanggal_penjualan))); ?></td>
+												<td><?= htmlspecialchars(date('F Y', strtotime($row->tanggal_penjualan))); ?></td>
 												<td><?= htmlspecialchars($row->jumlah); ?></td>
 												<td>
 													<?php if ($row->jumlah > $average) { ?>
@@ -205,6 +205,8 @@
 												<?php } ?>
 											</td>
 										</tr>
+
+
 									</tbody>
 								</table>
 							</div>
