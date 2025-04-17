@@ -3,7 +3,7 @@
 		<div class="col-md-12">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3 d-flex justify-content-between align-items-center">
-					<h6 class="m-0 font-weight-bold text-primary">Laporan Statistik Penjualan</h6>
+					<h6 class="m-0 font-weight-bold text-success">Laporan Statistik Penjualan</h6>
 				</div>
 				<div class="card-body">
 					<div class="chart-container" style="height: 75vh; position: relative;">
@@ -89,8 +89,8 @@
 				// Original datasets
 				{
 					label: 'Monthly Sales',
-					backgroundColor: 'rgba(161, 198, 247, 1)',
-					borderColor: 'rgb(47, 128, 237)',
+					backgroundColor: 'rgba(129, 199, 132, 1)',
+					borderColor: 'rgba(56, 142, 60, 1)',
 					data: data.slice(0, -5),
 					fill: true,
 					pointStyle: 'circle',
@@ -99,8 +99,8 @@
 				},
 				{
 					label: 'Predicted Sales',
-					backgroundColor: 'rgba(255, 210, 143, 1)',
-					borderColor: 'rgba(255, 154, 0, 1)',
+					backgroundColor: 'rgba(200, 230, 201, 1)',
+					borderColor: 'rgba(76, 175, 80, 1)',
 					data: Array(data.length - 6).fill(null).concat(data.slice(-6)),
 					fill: true,
 					pointStyle: 'circle',

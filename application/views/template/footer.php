@@ -4,7 +4,7 @@
                     <div class="col-lg-6 mb-lg-0 mb-4">
                         <div class="copyright text-center text-sm text-muted text-lg-start">
                             © <script>
-                            document.write(new Date().getFullYear())
+                                document.write(new Date().getFullYear())
                             </script>,
                             made with <i class="fa fa-heart"></i> by
                             <a href="javasript:;" class="font-weight-bold" target="_blank">Lilis Dwi Suryani</a>
@@ -49,7 +49,7 @@
                     </div>
                     <a href="javascript:void(0)" class="switch-trigger background-color">
                         <div class="badge-colors my-2 text-start">
-                            <span class="badge filter bg-gradient-primary active" data-color="primary"
+                            <span class="badge filter bg-gradient-success active" data-color="primary"
                                 onclick="sidebarColor(this)"></span>
                             <span class="badge filter bg-gradient-dark" data-color="dark"
                                 onclick="sidebarColor(this)"></span>

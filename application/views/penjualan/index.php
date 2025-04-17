@@ -3,7 +3,7 @@
 		<div class="col-12">
 			<div class="card my-4">
 				<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-					<div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+					<div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3">
 						<h6 class="text-white text-capitalize ps-3"><?= $title; ?></h6>
 					</div>
 				</div>
@@ -11,7 +11,7 @@
 
 
 				<div class="card-body px-3 pb-2">
-					<div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalTambah">Tambah
+					<div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalTambah">Tambah
 					</div>
 					<div class="table-responsive p-0">
 						<table class="table align-items-center mb-0">
@@ -131,7 +131,7 @@
 				</div>
 			</div>
 			<!-- Button trigger modal Predict -->
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#predictModal">
+			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#predictModal">
 				Predict
 			</button>
 
@@ -194,7 +194,7 @@
 										<?php } ?>
 
 
-										<tr class="table-primary fw-bold">
+										<tr class="table-success fw-bold">
 											<td>Prediksi <?= $b; ?></td>
 											<td><?= number_format(round($newft, 0), 0, ",", "."); ?></td>
 											<td>
